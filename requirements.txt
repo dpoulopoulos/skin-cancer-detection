@@ -1,0 +1,11 @@
+torch
+torchvision
+lightning
+tensorboardX
+pandas
+matplotlib
+seaborn
+pillow
+timm
+h5py
+scikit-learn

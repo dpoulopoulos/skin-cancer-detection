@@ -1,0 +1,9 @@
+torch
+torchvision
+lightning
+tensorboardX
+pandas
+pillow
+timm
+h5py
+scikit-learn

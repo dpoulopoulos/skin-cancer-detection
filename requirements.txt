@@ -1,5 +1,6 @@
 kfp[kubernetes]
 torch
+kaggle
 torchvision
 lightning
 tensorboardX

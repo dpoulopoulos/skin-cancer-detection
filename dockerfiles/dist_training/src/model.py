@@ -8,6 +8,9 @@ import torch.nn.functional as F
 class LitEfficientNet(L.LightningModule):
     def __init__(self):
         super().__init__()
+
+        # needed by the TensorBoard logger to extract the model graph
+        self.example_input_array = torch.rand(1, 3, 384, 384)
         
         # initialize the pretrained model
         self._prepare_model()

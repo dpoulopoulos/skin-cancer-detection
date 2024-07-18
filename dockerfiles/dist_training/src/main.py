@@ -23,6 +23,7 @@ def main():
     logger = TensorBoardLogger(
         "/logs/tb_logs/",
         name="isic-competition",
+        log_graph=True,
         flush_secs=60)
 
     # setup distributed training on a Kubeflow cluster

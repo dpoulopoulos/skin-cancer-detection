@@ -4,6 +4,7 @@ import torch
 import lightning as L
 
 from lightning.pytorch.strategies import DDPStrategy
+from lightning.pytorch.loggers import TensorBoardLogger
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.plugins.environments import KubeflowEnvironment
 
@@ -18,6 +19,13 @@ def main():
     model = LitEfficientNet()
     datamodule = ISICDataModule()
 
+    # setup the TensorBoard logger
+    logger = TensorBoardLogger(
+        "/logs/tb_logs/",
+        name="isic-competition",
+        flush_secs=60)
+
+    # setup distributed training on a Kubeflow cluster
     environment = KubeflowEnvironment()
     strategy = DDPStrategy(cluster_environment=environment)
 
@@ -35,6 +43,7 @@ def main():
         accelerator="gpu",
         num_nodes=2,
         strategy=strategy,
+        logger=logger,
         callbacks=[checkpoint_callback])
 
     trainer.fit(model, datamodule=datamodule)

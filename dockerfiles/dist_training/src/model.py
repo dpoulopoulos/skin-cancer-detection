@@ -34,12 +34,12 @@ class LitEfficientNet(L.LightningModule):
         inputs, labels = train_batch
         outputs = self(inputs)
         loss = F.binary_cross_entropy_with_logits(outputs, labels[:, None].half())
-        self.log("train_loss", loss, prog_bar=True)
+        self.log("train_loss", loss, prog_bar=True, sync_dist=True)
         return loss
 
     def validation_step(self, valid_batch, batch_idx):
         inputs, labels = valid_batch
         outputs = self(inputs)
         loss = F.binary_cross_entropy_with_logits(outputs, labels[:, None].half())
-        self.log("valid_loss", loss, prog_bar=True)
+        self.log("valid_loss", loss, prog_bar=True, sync_dist=True)
 

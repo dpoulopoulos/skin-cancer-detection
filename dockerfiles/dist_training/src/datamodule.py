@@ -11,7 +11,7 @@ from dataset import ISICDataset
 
 
 class ISICDataModule(L.LightningDataModule):
-    def __init__(self, data_path: str = "/data", batch_size: int = 48, num_workers: int = 2):
+    def __init__(self, data_path: str = "/data", batch_size: int = 128, num_workers: int = 2):
         super().__init__()
 
         self.data_path = data_path
@@ -34,7 +34,7 @@ class ISICDataModule(L.LightningDataModule):
         valid_isic_ids = valid_df['isic_id'].values
         
         transformations = transforms.Compose([
-            transforms.Resize((384, 384)),
+            transforms.Resize((128, 128)),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])

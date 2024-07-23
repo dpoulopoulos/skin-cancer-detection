@@ -10,14 +10,14 @@ class LitEfficientNet(L.LightningModule):
         super().__init__()
 
         # needed by the TensorBoard logger to extract the model graph
-        self.example_input_array = torch.rand(1, 3, 384, 384)
+        self.example_input_array = torch.rand(1, 3, 224, 224)
         
         # initialize the pretrained model
         self._prepare_model()
         
     def _prepare_model(self):
         # initialize a pretrained instance of the model
-        self.model = timm.create_model('tf_efficientnetv2_s.in21k', pretrained=True)
+        self.model = timm.create_model('efficientnet_b2', pretrained=True)
         
         # grab the number of input features to the classifier
         num_features = self.model.classifier.in_features

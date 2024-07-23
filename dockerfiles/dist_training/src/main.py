@@ -32,14 +32,14 @@ def main():
 
     # saves top-K checkpoints based on "val_loss" metric
     checkpoint_callback = ModelCheckpoint(
-        save_top_k=2,
+        save_top_k=1,
         monitor="valid_loss",
         mode="min",
         dirpath="/logs/checkpoints/",
-        filename="sample-isic-{epoch:02d}-{val_loss:.5f}")
+        filename="model_checkpoint")
 
     trainer = L.Trainer(
-        max_epochs=4,
+        max_epochs=1,
         precision="bf16-mixed",
         accelerator="gpu",
         num_nodes=2,
